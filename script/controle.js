@@ -9,36 +9,36 @@ var bateria, bateriaImage, canvas;
 var pecas = { 32: false, 68: false, 71: false, 72: false, 84: false, 89: false };
 
 var baseSom = {
-    i: 0,
-    init: function () {
+   i: 0,
+   audioBase: [new Audio],   
+   init: function () {
         this.i = 0;
-        for (j=0;j <= 15; j++){
-            this[j] = new Audio;
-        }
+		this.audioBase =  [new Audio];
+     
         return (this);
     },
-    ponteiro: function () {
-        if (i > 14) {
-            i = 0;
-        }
-        return i++;
-    },
-    0: new Audio, 1: new Audio, 2: new Audio, 3: new Audio, 4: new Audio, 5: new Audio, 6: new Audio,
-    7: new Audio, 8: new Audio, 9: new Audio, 10: new Audio, 11: new Audio, 12: new Audio, 13: new Audio,
-    14: new Audio, 15: new Audio
+	getAudio: function () {
+		this.i = 0;
+		while(!this.audioBase[this.i].paused) {
+			this.audioBase.push(new Audio);
+			this.audioBase[this.i+1].src = this.audioBase[this.i].src;
+			this.i++;
+		}
+		return this.audioBase[this.i];
+    }
 }
 
 var sons = {
-    audioChimbalCaixas: Object.create(baseSom).init(),
-    audioChimbalBumbos: Object.create(baseSom).init(),
-    audioCaixaBumbos: Object.create(baseSom).init(),
-    audioPratoBumbos: Object.create(baseSom).init(),
-    audioBumbos: Object.create(baseSom).init(),
-    audioCaixas: Object.create(baseSom).init(),
-    audioTons: Object.create(baseSom).init(),
-    audioSurdos: Object.create(baseSom).init(),
-    audioChimbals: Object.create(baseSom).init(),
-    audioPratos: Object.create(baseSom).init()
+    audioChimbalCaixa: Object.create(baseSom).init(),
+    audioChimbalBumbo: Object.create(baseSom).init(),
+    audioCaixaBumbo: Object.create(baseSom).init(),
+    audioPratoBumbo: Object.create(baseSom).init(),
+    audioBumbo: Object.create(baseSom).init(),
+    audioCaixa: Object.create(baseSom).init(),
+    audioTom: Object.create(baseSom).init(),
+    audioSurdo: Object.create(baseSom).init(),
+    audioChimbal: Object.create(baseSom).init(),
+    audioPrato: Object.create(baseSom).init()
 };
 
 var frameIndex = {
@@ -54,22 +54,16 @@ var frameIndex = {
     prato: 10
 };
 
-inicializaAudio(sons.audioChimbalCaixas, document.getElementById("audioChimbalCaixa").src, 15);
-inicializaAudio(sons.audioChimbalBumbos, document.getElementById("audioChimbalBumbo").src, 15);
-inicializaAudio(sons.audioCaixaBumbos, document.getElementById("audioCaixaBumbo").src, 15);
-inicializaAudio(sons.audioPratoBumbos, document.getElementById("audioPratoBumbo").src, 15);
-inicializaAudio(sons.audioBumbos, document.getElementById("audioBumbo").src, 15);
-inicializaAudio(sons.audioCaixas, document.getElementById("audioCaixa").src, 15);
-inicializaAudio(sons.audioTons, document.getElementById("audioTom").src, 15);
-inicializaAudio(sons.audioSurdos, document.getElementById("audioSurdo").src, 15);
-inicializaAudio(sons.audioChimbals, document.getElementById("audioChimbal").src,15);
-inicializaAudio(sons.audioPratos, document.getElementById("audioPrato").src, 15);
-
-function inicializaAudio(lsSons, source, count) {
-     for (i = 0; i < count; i++) {
-        lsSons[i].src = source;
-    }
-}
+sons.audioChimbalCaixa.audioBase[0].src = document.getElementById("audioChimbalCaixa").src;
+sons.audioChimbalBumbo.audioBase[0].src = document.getElementById("audioChimbalBumbo").src;
+sons.audioCaixaBumbo.audioBase[0].src = document.getElementById("audioCaixaBumbo").src;
+sons.audioPratoBumbo.audioBase[0].src = document.getElementById("audioPratoBumbo").src;
+sons.audioBumbo.audioBase[0].src = document.getElementById("audioBumbo").src;
+sons.audioCaixa.audioBase[0].src = document.getElementById("audioCaixa").src;
+sons.audioTom.audioBase[0].src = document.getElementById("audioTom").src;
+sons.audioSurdo.audioBase[0].src = document.getElementById("audioSurdo").src;
+sons.audioChimbal.audioBase[0].src = document.getElementById("audioChimbal").src;
+sons.audioPrato.audioBase[0].src = document.getElementById("audioPrato").src;
 
 function animarPeca(frameIndex, audio) {
     bateria.render(frameIndex);
@@ -110,37 +104,37 @@ $(document).keydown(function (e) {
         pecas[keyCode] = true;
         //chimbal e caixa
         if (pecas[84] && pecas[68]) {
-            animarPeca(frameIndex.chimbalCaixa, sons.audioChimbalCaixas[sons.audioChimbalCaixas.ponteiro()]);
+            animarPeca(frameIndex.chimbalCaixa, sons.audioChimbalCaixa.getAudio());
         }
             //chimbal+bumbo
         else if (pecas[84] && pecas[32]) {
-            animarPeca(frameIndex.chimbalBumbo, sons.audioChimbalBumbos[sons.audioChimbalBumbos.ponteiro()]);
+            animarPeca(frameIndex.chimbalBumbo, sons.audioChimbalBumbo.getAudio());
         }
             //caixa+bumbo
         else if (pecas[68] && pecas[32]) {
-            animarPeca(frameIndex.caixaBumbo, sons.audioCaixaBumbos[sons.audioCaixaBumbos.ponteiro()]);
+            animarPeca(frameIndex.caixaBumbo, sons.audioCaixaBumbo.getAudio());
         }
             //prato+bumbo
         else if (pecas[89] && pecas[32]) {
-            animarPeca(frameIndex.pratoBumbo, sons.audioPratoBumbos[sons.audioPratoBumbos.ponteiro()]);
+            animarPeca(frameIndex.pratoBumbo, sons.audioPratoBumbo.getAudio());
         }
         else if (pecas[32]) {
-            animarPeca(frameIndex.bumbo, sons.audioBumbos[sons.audioBumbos.ponteiro()]);
+            animarPeca(frameIndex.bumbo, sons.audioBumbo.getAudio());
         }
         else if (pecas[68]) {
-            animarPeca(frameIndex.caixa, sons.audioCaixas[sons.audioCaixas.ponteiro()]);
+            animarPeca(frameIndex.caixa, sons.audioCaixa.getAudio());
         }
         else if (pecas[71]) {
-            animarPeca(frameIndex.tom, sons.audioTons[sons.audioTons.ponteiro()]);
+            animarPeca(frameIndex.tom, sons.audioTom.getAudio());
         }
         else if (pecas[72]) {
-            animarPeca(frameIndex.surdo, sons.audioSurdos[sons.audioSurdos.ponteiro()]);
+            animarPeca(frameIndex.surdo, sons.audioSurdo.getAudio());
         }
         else if (pecas[84]) {
-            animarPeca(frameIndex.chimbal, sons.audioChimbals[sons.audioChimbals.ponteiro()]);
+            animarPeca(frameIndex.chimbal, sons.audioChimbal.getAudio());
         }
         else if (pecas[89]) {
-            animarPeca(frameIndex.prato, sons.audioPratos[sons.audioPratos.ponteiro()]);
+            animarPeca(frameIndex.prato, sons.audioPrato.getAudio());
         }
 
     }
@@ -152,10 +146,8 @@ $(document).keydown(function (e) {
         pecas[keyCode] = false;
     }
 }).ready(function () {
-
     bateriaImage.src = "images/spriteBateria.png";
-    setTimeout("bateria.render(11)", 200);
-
+    setTimeout("bateria.render(11)", 2000);
 });
 
 // obter canvas
