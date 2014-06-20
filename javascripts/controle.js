@@ -154,7 +154,7 @@ $(document).keydown(function (e) {
 }).ready(function () {
 
     bateriaImage.src = "images/spriteBateria.png";
-    setTimeout("bateria.render(11)", 200);
+    setTimeout("bateria.render(11)", 2000);
 
 });
 
