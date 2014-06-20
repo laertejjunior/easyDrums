@@ -5,32 +5,42 @@ Author: Laerte Mercier Junior
 Version: 1.0.0
 -------------------------------------------------------------------------*/
 var bateria, bateriaImage, canvas;
-var audio = new Audio();
+
+var pecas = { 32: false, 68: false, 71: false, 72: false, 84: false, 89: false };
+
+var baseSom = {
+    i: 0,
+    init: function () {
+        this.i = 0;
+        for (j=0;j <= 15; j++){
+            this[j] = new Audio;
+        }
+        return (this);
+    },
+    ponteiro: function () {
+        if (i > 14) {
+            i = 0;
+        }
+        return i++;
+    },
+    0: new Audio, 1: new Audio, 2: new Audio, 3: new Audio, 4: new Audio, 5: new Audio, 6: new Audio,
+    7: new Audio, 8: new Audio, 9: new Audio, 10: new Audio, 11: new Audio, 12: new Audio, 13: new Audio,
+    14: new Audio, 15: new Audio
+}
 
 var sons = {
-    audioChimbalCaixa: new Audio,
-    audioChimbalBumbo: new Audio,
-    audioCaixaBumbo: new Audio,
-    audioPratoBumbo: new Audio,
-    audioBumbo: new Audio,
-    audioCaixa: new Audio,
-    audioTom: new Audio,
-    audioSurdo: new Audio,
-    audioChimbal: new Audio,
-    audioPrato: new Audio
+    audioChimbalCaixas: Object.create(baseSom).init(),
+    audioChimbalBumbos: Object.create(baseSom).init(),
+    audioCaixaBumbos: Object.create(baseSom).init(),
+    audioPratoBumbos: Object.create(baseSom).init(),
+    audioBumbos: Object.create(baseSom).init(),
+    audioCaixas: Object.create(baseSom).init(),
+    audioTons: Object.create(baseSom).init(),
+    audioSurdos: Object.create(baseSom).init(),
+    audioChimbals: Object.create(baseSom).init(),
+    audioPratos: Object.create(baseSom).init()
 };
 
-
-sons.audioChimbalCaixa.src = document.getElementById("audioChimbalCaixa").src;
-sons.audioChimbalBumbo.src = document.getElementById("audioChimbalBumbo").src;
-sons.audioCaixaBumbo.src = document.getElementById("audioCaixaBumbo").src;
-sons.audioPratoBumbo.src = document.getElementById("audioPratoBumbo").src;
-sons.audioBumbo.src = document.getElementById("audioBumbo").src;
-sons.audioCaixa.src = document.getElementById("audioCaixa").src;
-sons.audioTom.src = document.getElementById("audioTom").src;
-sons.audioSurdo.src = document.getElementById("audioSurdo").src;
-sons.audioChimbal.src = document.getElementById("audioChimbal").src;
-sons.audioPrato.src = document.getElementById("audioPrato").src;
 var frameIndex = {
     chimbalCaixa: 1,
     chimbalBumbo: 2,
@@ -43,15 +53,53 @@ var frameIndex = {
     surdo: 9,
     prato: 10
 };
-var pecas = { 32: false, 68: false, 71: false, 72: false, 84: false, 89: false };
 
-function animarPeca(frameIndex, a, tempo) {
-    audio = a;
+inicializaAudio(sons.audioChimbalCaixas, document.getElementById("audioChimbalCaixa").src, 15);
+inicializaAudio(sons.audioChimbalBumbos, document.getElementById("audioChimbalBumbo").src, 15);
+inicializaAudio(sons.audioCaixaBumbos, document.getElementById("audioCaixaBumbo").src, 15);
+inicializaAudio(sons.audioPratoBumbos, document.getElementById("audioPratoBumbo").src, 15);
+inicializaAudio(sons.audioBumbos, document.getElementById("audioBumbo").src, 15);
+inicializaAudio(sons.audioCaixas, document.getElementById("audioCaixa").src, 15);
+inicializaAudio(sons.audioTons, document.getElementById("audioTom").src, 15);
+inicializaAudio(sons.audioSurdos, document.getElementById("audioSurdo").src, 15);
+inicializaAudio(sons.audioChimbals, document.getElementById("audioChimbal").src,15);
+inicializaAudio(sons.audioPratos, document.getElementById("audioPrato").src, 15);
+
+function inicializaAudio(lsSons, source, count) {
+     for (i = 0; i < count; i++) {
+        lsSons[i].src = source;
+    }
+}
+
+function animarPeca(frameIndex, audio) {
     bateria.render(frameIndex);
     audio.play();
-    setTimeout("bateria.render(0);audio.pause();audio.currentTime = 0;", tempo);
-    console.log('animar pe�a');
+    setTimeout("bateria.render(0);", 150);
+}
 
+function sprite(opcoes) {
+    var that = {},
+    numeroDeFrames = opcoes.numeroDeFrames || 1;
+    that.context = opcoes.context;
+    that.width = opcoes.width;
+    that.height = opcoes.height;
+    that.image = opcoes.image;
+    that.render = function (frameIndex) {
+        // limpa o canvas
+        that.context.clearRect(0, 0, that.width, that.height);
+        // desenha a imagem
+        that.context.drawImage(
+                that.image,
+                frameIndex * that.width / numeroDeFrames,
+                0,
+                that.width / numeroDeFrames,
+                that.height,
+                0,
+                0,
+                that.width / numeroDeFrames,
+                that.height);
+    };
+    return that;
 }
 
 $(document).keydown(function (e) {
@@ -60,42 +108,39 @@ $(document).keydown(function (e) {
     var keyCode = (isNN) ? e.which : e.keyCode;
     if (keyCode in pecas) {
         pecas[keyCode] = true;
-
-        console.clear();
-        //execu��o das pe�as. Primeiros verificamos as combina��es, depois as pe�as isoladamente.
         //chimbal e caixa
         if (pecas[84] && pecas[68]) {
-            animarPeca(frameIndex.chimbalCaixa, sons.audioChimbalCaixa, 100);
+            animarPeca(frameIndex.chimbalCaixa, sons.audioChimbalCaixas[sons.audioChimbalCaixas.ponteiro()]);
         }
             //chimbal+bumbo
         else if (pecas[84] && pecas[32]) {
-            animarPeca(frameIndex.chimbalBumbo, sons.audioChimbalBumbo, 100);
+            animarPeca(frameIndex.chimbalBumbo, sons.audioChimbalBumbos[sons.audioChimbalBumbos.ponteiro()]);
         }
             //caixa+bumbo
         else if (pecas[68] && pecas[32]) {
-            animarPeca(frameIndex.caixaBumbo, sons.audioCaixaBumbo, 200);
+            animarPeca(frameIndex.caixaBumbo, sons.audioCaixaBumbos[sons.audioCaixaBumbos.ponteiro()]);
         }
             //prato+bumbo
         else if (pecas[89] && pecas[32]) {
-            animarPeca(frameIndex.pratoBumbo, sons.audioPratoBumbo, 200);
+            animarPeca(frameIndex.pratoBumbo, sons.audioPratoBumbos[sons.audioPratoBumbos.ponteiro()]);
         }
         else if (pecas[32]) {
-            animarPeca(frameIndex.bumbo, sons.audioBumbo, 100);
+            animarPeca(frameIndex.bumbo, sons.audioBumbos[sons.audioBumbos.ponteiro()]);
         }
         else if (pecas[68]) {
-            animarPeca(frameIndex.caixa, sons.audioCaixa, 200);
+            animarPeca(frameIndex.caixa, sons.audioCaixas[sons.audioCaixas.ponteiro()]);
         }
         else if (pecas[71]) {
-            animarPeca(frameIndex.tom, sons.audioTom, 100);
+            animarPeca(frameIndex.tom, sons.audioTons[sons.audioTons.ponteiro()]);
         }
         else if (pecas[72]) {
-            animarPeca(frameIndex.surdo, sons.audioSurdo, 100);
+            animarPeca(frameIndex.surdo, sons.audioSurdos[sons.audioSurdos.ponteiro()]);
         }
         else if (pecas[84]) {
-            animarPeca(frameIndex.chimbal, sons.audioChimbal, 100);
+            animarPeca(frameIndex.chimbal, sons.audioChimbals[sons.audioChimbals.ponteiro()]);
         }
         else if (pecas[89]) {
-            animarPeca(frameIndex.prato, sons.audioPrato, 200);
+            animarPeca(frameIndex.prato, sons.audioPratos[sons.audioPratos.ponteiro()]);
         }
 
     }
@@ -129,27 +174,3 @@ bateria = sprite({
 });
 
 
-function sprite(opcoes) {
-    var that = {},
-    numeroDeFrames = opcoes.numeroDeFrames || 1;
-    that.context = opcoes.context;
-    that.width = opcoes.width;
-    that.height = opcoes.height;
-    that.image = opcoes.image;
-    that.render = function (frameIndex) {
-        // limpa o canvas
-        that.context.clearRect(0, 0, that.width, that.height);
-        // desenha a imagem
-        that.context.drawImage(
-                that.image,
-                frameIndex * that.width / numeroDeFrames,
-                0,
-                that.width / numeroDeFrames,
-                that.height,
-                0,
-                0,
-                that.width / numeroDeFrames,
-                that.height);
-    };
-    return that;
-}
