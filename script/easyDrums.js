@@ -6,6 +6,7 @@ Version: 1.0.0
 -------------------------------------------------------------------------*/
 var bateria, bateriaImage, canvas;
 
+var pecasIndex = { BUMBO: 32, CAIXA: 68, TOM: 71, SURDO: 72, CHIMBAL: 84, PRATO: 89};
 var pecas = { 32: false, 68: false, 71: false, 72: false, 84: false, 89: false };
 
 var baseSom = {
@@ -111,29 +112,29 @@ $(document).keydown(function (e) {
             animarPeca(frameIndex.chimbalBumbo, sons.audioChimbalBumbo.getAudio());
         }
             //caixa+bumbo
-        else if (pecas[68] && pecas[32]) {
+        else if (pecas[pecasIndex.CAIXA] && pecas[pecasIndex.BUMBO]) {
             animarPeca(frameIndex.caixaBumbo, sons.audioCaixaBumbo.getAudio());
         }
             //prato+bumbo
-        else if (pecas[89] && pecas[32]) {
+        else if (pecas[pecasIndex.PRATO] && pecas[pecasIndex.BUMBO]) {
             animarPeca(frameIndex.pratoBumbo, sons.audioPratoBumbo.getAudio());
         }
         else if (pecas[32]) {
             animarPeca(frameIndex.bumbo, sons.audioBumbo.getAudio());
         }
-        else if (pecas[68]) {
+        else if (pecas[pecasIndex.CAIXA]) {
             animarPeca(frameIndex.caixa, sons.audioCaixa.getAudio());
         }
-        else if (pecas[71]) {
+        else if (pecas[pecasIndex.TOM]) {
             animarPeca(frameIndex.tom, sons.audioTom.getAudio());
         }
-        else if (pecas[72]) {
+        else if (pecas[pecasIndex.SURDO]) {
             animarPeca(frameIndex.surdo, sons.audioSurdo.getAudio());
         }
-        else if (pecas[84]) {
+        else if (pecas[pecasIndex.CHIMBAL]) {
             animarPeca(frameIndex.chimbal, sons.audioChimbal.getAudio());
         }
-        else if (pecas[89]) {
+        else if (pecas[pecasIndex.PRATO]) {
             animarPeca(frameIndex.prato, sons.audioPrato.getAudio());
         }
 
