@@ -156,7 +156,6 @@ $(document).keydown(function (e) {
 canvas = document.getElementById("animacaoBateria");
 canvas.width = 500;
 canvas.height = 500;
-// Create sprite sheet
 bateriaImage = new Image();
 // Criar sprite
 bateria = sprite({
