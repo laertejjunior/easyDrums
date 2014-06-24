@@ -8,7 +8,7 @@ var bateria, bateriaImage, canvas;
 
 var pecasIndex = { BUMBO: 32, CAIXA: 68, TOM: 71, SURDO: 72, CHIMBAL: 84, PRATO: 89};
 var pecas = { 32: false, 68: false, 71: false, 72: false, 84: false, 89: false };
-var unidadeTempo = 100;
+var unidadeTempo = 200;
 
 var baseSom = {
    i: 0,
