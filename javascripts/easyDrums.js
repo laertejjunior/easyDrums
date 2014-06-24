@@ -8,6 +8,7 @@ var bateria, bateriaImage, canvas;
 
 var pecasIndex = { BUMBO: 32, CAIXA: 68, TOM: 71, SURDO: 72, CHIMBAL: 84, PRATO: 89};
 var pecas = { 32: false, 68: false, 71: false, 72: false, 84: false, 89: false };
+var unidadeTempo = 100;
 
 var baseSom = {
    i: 0,
@@ -149,7 +150,42 @@ $(document).keydown(function (e) {
 }).ready(function () {
     bateriaImage.src = "images/spriteBateria.png";
     setTimeout("bateria.render(11)", 2000);
+    musicaInicial();
 });
+
+function musicaInicial(){
+	//solo inicial
+	setTimeout("animarPeca(frameIndex.chimbalBumbo, sons.audioChimbalBumbo.getAudio());", unidadeTempo *1);
+	setTimeout("animarPeca(frameIndex.chimbal, sons.audioChimbal.getAudio());", unidadeTempo *2);
+	setTimeout("animarPeca(frameIndex.chimbalCaixa, sons.audioChimbalCaixa.getAudio());", unidadeTempo *3);
+	setTimeout("animarPeca(frameIndex.chimbalBumbo, sons.audioChimbalBumbo.getAudio());", unidadeTempo *4);
+	setTimeout("animarPeca(frameIndex.chimbal, sons.audioChimbal.getAudio());", unidadeTempo *5);
+	setTimeout("animarPeca(frameIndex.chimbalBumbo, sons.audioChimbalBumbo.getAudio());", unidadeTempo *6);
+	setTimeout("animarPeca(frameIndex.chimbalCaixa, sons.audioChimbalCaixa.getAudio());", unidadeTempo *7);
+	setTimeout("animarPeca(frameIndex.chimbal, sons.audioChimbal.getAudio());", unidadeTempo *8);
+	setTimeout("animarPeca(frameIndex.chimbalBumbo, sons.audioChimbalBumbo.getAudio());", unidadeTempo *9);
+	setTimeout("animarPeca(frameIndex.chimbal, sons.audioChimbal.getAudio());", unidadeTempo *10);
+	setTimeout("animarPeca(frameIndex.chimbalCaixa, sons.audioChimbalCaixa.getAudio());", unidadeTempo *11);
+	setTimeout("animarPeca(frameIndex.chimbalBumbo, sons.audioChimbalBumbo.getAudio());", unidadeTempo *12);
+	setTimeout("animarPeca(frameIndex.chimbal, sons.audioChimbal.getAudio());", unidadeTempo *13);
+	setTimeout("animarPeca(frameIndex.chimbalBumbo, sons.audioChimbalBumbo.getAudio());", unidadeTempo *14);
+	setTimeout("animarPeca(frameIndex.chimbalCaixa, sons.audioChimbalCaixa.getAudio());", unidadeTempo *15);
+	setTimeout("animarPeca(frameIndex.chimbal, sons.audioChimbal.getAudio());", unidadeTempo *16);
+	setTimeout("animarPeca(frameIndex.chimbalBumbo, sons.audioChimbalBumbo.getAudio());", unidadeTempo *17);
+	setTimeout("animarPeca(frameIndex.chimbal, sons.audioChimbal.getAudio());", unidadeTempo *18);
+	setTimeout("animarPeca(frameIndex.chimbalCaixa, sons.audioChimbalCaixa.getAudio());", unidadeTempo *19);
+	setTimeout("animarPeca(frameIndex.chimbalBumbo, sons.audioChimbalBumbo.getAudio());", unidadeTempo *20);
+	setTimeout("animarPeca(frameIndex.chimbal, sons.audioChimbal.getAudio());", unidadeTempo *21);
+	setTimeout("animarPeca(frameIndex.chimbalBumbo, sons.audioChimbalBumbo.getAudio());", unidadeTempo *22);
+	setTimeout("animarPeca(frameIndex.chimbalCaixa, sons.audioChimbalCaixa.getAudio());", unidadeTempo *23);
+	setTimeout("animarPeca(frameIndex.chimbal, sons.audioChimbal.getAudio());", unidadeTempo *24);
+	setTimeout("animarPeca(frameIndex.chimbalBumbo, sons.audioChimbalBumbo.getAudio());", unidadeTempo *25);
+	setTimeout("animarPeca(frameIndex.chimbalBumbo, sons.audioChimbalBumbo.getAudio());", unidadeTempo *27);
+	setTimeout("animarPeca(frameIndex.chimbalBumbo, sons.audioChimbalBumbo.getAudio());", unidadeTempo *29);
+	setTimeout("animarPeca(frameIndex.chimbalBumbo, sons.audioChimbalBumbo.getAudio());", unidadeTempo *31);
+	setTimeout("animarPeca(frameIndex.bumbo, sons.audioBumbo.getAudio());animarPeca(frameIndex.prato, sons.audioPrato.getAudio());", unidadeTempo *33);
+}
+
 
 // obter canvas
 canvas = document.getElementById("animacaoBateria");
