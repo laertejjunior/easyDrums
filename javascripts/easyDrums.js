@@ -179,12 +179,24 @@ function musicaInicial(){
 	setTimeout("animarPeca(frameIndex.chimbalBumbo, sons.audioChimbalBumbo.getAudio());", unidadeTempo *22);
 	setTimeout("animarPeca(frameIndex.chimbalCaixa, sons.audioChimbalCaixa.getAudio());", unidadeTempo *23);
 	setTimeout("animarPeca(frameIndex.chimbal, sons.audioChimbal.getAudio());", unidadeTempo *24);
-	setTimeout("animarPeca(frameIndex.chimbalBumbo, sons.audioChimbalBumbo.getAudio());", unidadeTempo *25);
-	setTimeout("animarPeca(frameIndex.chimbalBumbo, sons.audioChimbalBumbo.getAudio());", unidadeTempo *27);
-	setTimeout("animarPeca(frameIndex.chimbalBumbo, sons.audioChimbalBumbo.getAudio());", unidadeTempo *29);
-	setTimeout("animarPeca(frameIndex.chimbalBumbo, sons.audioChimbalBumbo.getAudio());", unidadeTempo *31);
-	setTimeout("animarPeca(frameIndex.bumbo, sons.audioBumbo.getAudio());animarPeca(frameIndex.prato, sons.audioPrato.getAudio());", unidadeTempo *33);
-}
+	
+	setTimeout("animarPeca(frameIndex.chimbalBumbo, sons.audioChimbalBumbo.getAudio());", unidadeTempo  *24.5);
+	setTimeout("animarPeca(frameIndex.tom, sons.audioTom.getAudio());", unidadeTempo  *25);	
+	setTimeout("animarPeca(frameIndex.surdo, sons.audioSurdo.getAudio());", unidadeTempo  *25.5);
+	setTimeout("animarPeca(frameIndex.caixa, sons.audioCaixa.getAudio());", unidadeTempo  *26.0);
+	
+	setTimeout("animarPeca(frameIndex.chimbalBumbo, sons.audioChimbalBumbo.getAudio());", unidadeTempo  *28.0);
+	setTimeout("animarPeca(frameIndex.tom, sons.audioTom.getAudio());", unidadeTempo  *28.5);	
+	setTimeout("animarPeca(frameIndex.surdo, sons.audioSurdo.getAudio());", unidadeTempo  *29);
+	setTimeout("animarPeca(frameIndex.caixa, sons.audioCaixa.getAudio());", unidadeTempo  *29.5);
+
+	
+	setTimeout("animarPeca(frameIndex.caixa, sons.audioCaixa.getAudio());", unidadeTempo  *31.5);
+	setTimeout("animarPeca(frameIndex.tom, sons.audioTom.getAudio());", unidadeTempo  *32.0);
+	setTimeout("animarPeca(frameIndex.chimbalBumbo, sons.audioChimbalBumbo.getAudio());", unidadeTempo  *32.5);
+	setTimeout("animarPeca(frameIndex.surdo, sons.audioSurdo.getAudio());", unidadeTempo  *33.0);
+	setTimeout("animarPeca(frameIndex.bumbo, sons.audioBumbo.getAudio());animarPeca(frameIndex.prato, sons.audioPrato.getAudio());", unidadeTempo *33.5);
+	}
 
 
 // obter canvas
